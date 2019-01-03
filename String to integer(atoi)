@@ -1,0 +1,39 @@
+class Solution:
+    def myAtoi(self, str):
+        """
+        :type str: str
+        :rtype: int
+        """
+        i = 0
+        r = ['']
+        if str == '':
+            return 0
+        number = 0
+        while i+1 < len(str)-1 and str[i] == ' ':
+            i += 1
+        if str[i] != '+' and str[i] != '-' and str[i].isdigit() == False:
+            return 0
+        
+        if str[i] == '-' and i+1 <= len(str)-1 and str[i+1].isdigit():
+            while i+1 <= len(str)-1 and str[i+1].isdigit():              
+                r.append(str[i+1])
+                i += 1
+            number = int(''.join(r))*(-1)    
+        elif str[i].isdigit():
+            while i <= len(str)-1 and str[i].isdigit():
+                
+                r.append(str[i])
+                i += 1
+            number = int(''.join(r))
+        elif str[i] == '+' and i+1 <= len(str)-1 and str[i+1].isdigit():
+            while i+1 <= len(str)-1 and str[i+1].isdigit():              
+                r.append(str[i+1])
+                i += 1
+                number = int(''.join(r))
+            
+        if number in range (-(2**31), (2**31)-1):
+            return number
+        elif number > 0:
+            return (2**31)-1
+        else:
+            return -(2**31)
