@@ -1,0 +1,50 @@
+# slow on large list
+import itertools
+class Solution:
+    def threeSum(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        # find all triplets and test if sum equals to 0
+        rList = [] 
+        for i in itertools.combinations(nums,3):
+            duplicate = False
+            if (i[0]+i[1]+i[2]) == 0:
+                for j in rList:
+                    if i[0] in j and i[1] in j and i[2] in j:
+                        duplicate = True
+                        break
+                        
+                if not duplicate or (i[0] == i[1] == i[2]==0):    
+                    rList.append(i)
+        rList = list(set(rList))
+        return rList        
+       
+##################################################################
+class Solution:
+    def threeSum(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        nums.sort()
+        N = len(nums)
+        result = []
+        for i in range(N):
+            if i > 0 and nums[i] == nums[i-1]:
+                continue #remove duplicates
+            target = nums[i]*-1
+            s = i+1 #narrow down from two sides
+            e = N-1
+            while s<e:
+                if nums[s]+nums[e] == target:
+                    result.append([nums[i], nums[s], nums[e]])
+                    s = s+1
+                    while s<e and nums[s] == nums[s-1]:
+                        s = s+1
+                elif nums[s] + nums[e] < target:
+                    s += 1
+                else:
+                    e -= 1
+        return result
