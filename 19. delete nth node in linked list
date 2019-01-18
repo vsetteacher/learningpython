@@ -1,0 +1,27 @@
+class Solution:
+    def removeNthFromEnd(self, head, n):
+        """
+        :type head: ListNode
+        :type n: int
+        :rtype: ListNode
+        """
+        count1 = count2 = 0
+        temp = head
+        prev = ListNode(0)
+        if head.next == None:
+            return head.next
+        while temp:
+            temp = temp.next
+            count1 += 1            
+        temp = head
+        if count1 == n:
+            head = temp.next
+            temp = None
+            return head    
+        while count2 < count1 - n:
+            prev = temp
+            temp = temp.next
+            count2 += 1
+        prev.next = temp.next
+        temp = None
+        return head
