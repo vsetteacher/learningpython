@@ -13,7 +13,7 @@ class Solution:
                 if stack:
                     top = stack.pop()
                 else:
-                    top = '#'
+                    top = ''
                 if mapping[char] != top:
                     return False
             else:
