@@ -1,0 +1,41 @@
+# brute force ( traverse linked list to get each value and create two lists to contain the values )
+class Solution:
+    def swapPairs(self, head):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        """
+        if head == None: return None
+        if head.next == None: return head
+        list1, list2 = [],[]
+        dummy = cur = ListNode(0)
+        while head:
+            list1.append(head.val)
+            head = head.next
+            if head:
+                list2.append(head.val)  
+                head = head.next
+                
+            
+            
+        for i,j in zip(list1,list2):
+            cur.next = ListNode(j)
+            cur = cur.next
+            cur.next = ListNode(i)
+            cur = cur.next
+        if len(list1) > len(list2):
+            cur.next = ListNode(list1[-1])
+            cur = cur.next
+        return dummy.next    
+###############################################################################################
+#To go from pre -> a -> b -> b.next to pre -> b -> a -> b.next
+class Solution:
+    def swapPairs(self, head):
+        temp = ListNode(0)
+        pre, pre.next = temp,head
+        while pre.next and pre.next.next:
+            a = pre.next
+            b = a.next
+            pre.next, b.next, a.next = b, a, b.next
+            pre = a
+        return temp.next
