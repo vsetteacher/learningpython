@@ -29,3 +29,25 @@ class Solution:
         for i in lists:
             cur = self.mergeTwoLists(cur,i)
         return cur.next   
+##############################################################################################################
+# brute force (go through all lists and create a new list then sort and create linked list based on its value)
+class Solution:
+    
+    def mergeKLists(self, lists):
+        """
+        :type lists: List[ListNode]
+        :rtype: ListNode
+        """
+        if len(lists) < 1: return None
+        kList = []
+        dummy = cur = ListNode(0)
+        for i in lists:
+            while i:
+                kList.append(i.val)
+                i = i.next
+        kList.sort()
+        for j in kList:
+            cur.next = ListNode(j)
+            cur = cur.next
+            
+        return dummy.next    
