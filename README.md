@@ -9,4 +9,4 @@ question 18: 4 sum
 
 question 22: generate parentheses
 
-question
+question 23 : divide and conquer
