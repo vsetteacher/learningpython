@@ -1,0 +1,40 @@
+class Solution(object):
+    """
+        start: the start of the target string
+        end: the end of the target string
+        n = len(s)
+        k = len(words[0])
+        t = len(words) * k
+        s : the string
+        req : a dict counts occurrence of each words
+        ans : the result list to be returned
+    """
+    def _findSubstring(self, start, end, n, k, t, s, req, ans): 
+        curr = {}
+        while end + k <= n:
+            word = s[end:end + k]
+            end += k
+            if word not in req:
+                start = end
+                curr.clear()
+            else:
+                curr[word] = curr[word] + 1 if word in curr else 1
+                while curr[word] > req[word]:
+                    curr[s[start:start + k]] -= 1
+                    start += k
+                if end - start == t:
+                    ans.append(start)
+
+    def findSubstring(self, s, words):
+        if not s or not words or not words[0]:
+            return []
+        n = len(s)
+        k = len(words[0])
+        t = len(words) * k
+        req = {}
+        for word in words:
+            req[word] = req[word] + 1 if word in req else 1
+        ans = []
+        for i in range(min(k, n - t + 1)):
+            self._findSubstring(i, i, n, k, t, s, req, ans)
+        return ans
