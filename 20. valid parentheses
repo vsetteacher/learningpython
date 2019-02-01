@@ -20,4 +20,4 @@ class Solution:
                 stack.append(char)
         return not stack       
                         
-#utilize FIFO behavior of stack to achieve
+#utilize FILO behavior of stack to achieve
