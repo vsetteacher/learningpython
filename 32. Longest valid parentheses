@@ -1,0 +1,36 @@
+
+#brute force : always out of time limit
+class Solution:
+    def longestValidParentheses(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        if not s or len(s) == 1:
+            return 0
+        maxlen = 0
+
+        for i in range(len(s)):
+            j = i + 2
+            while j <= len(s):
+                if self.isValid(s[i:j]):
+                    maxlen = max(maxlen, j - i)
+                j += 2
+               
+        return maxlen
+            
+    def isValid(self, s):
+        stack = []
+        
+        for char in s:
+            if char == ')':
+                if stack:
+                    top = stack.pop()
+                else:
+                    top = ''
+                if top != '(' :
+                    return False
+            else:
+                stack.append(char)
+        return not stack   
+##############################################################
