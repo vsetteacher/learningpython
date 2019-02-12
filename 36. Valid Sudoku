@@ -4,35 +4,35 @@ class Solution(object):
         :type board: List[List[str]]
         :rtype: bool
         """
-        rowDict = []
-        colDict = []
-        gridDict = []
+        row = []
+        col = []
+        grid = []
         
         for i in range(9):
-            rowDict.append([])
-            colDict.append([])
-            gridDict.append([])
+            row.append([])
+            col.append([])
+            grid.append([])
         
         for i in range(9):
             for j in range(9):
-                curVal = board[i][j]
+                val = board[i][j]
 
-                if curVal == '.':
+                if val == '.':
                     continue
-                if curVal in rowDict[i]:
+                if val in row[i]:
                     return False
                 else:
-                    rowDict[i].append(curVal)
+                    row[i].append(val)
                 
-                if curVal in colDict[j]:
+                if val in col[j]:
                     return False
                 else:
-                    colDict[j].append(curVal)
+                    col[j].append(val)
                     
            
-                grid = (i//3)*3+j//3
-                if curVal in gridDict[grid]:
+                k = (i//3)*3 + j//3 # grid index
+                if val in grid[k]:
                     return False
                 else:
-                    gridDict[grid].append(curVal)
+                    grid[k].append(val)
         return True
