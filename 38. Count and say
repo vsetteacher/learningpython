@@ -1,0 +1,35 @@
+class Solution:
+    def countAndSay(self, n: 'int') -> 'str':
+        if n == 1:
+            return "1"
+        string = self.countAndSay(n-1) + "0" # add extra char to go through the loop
+        result = ""
+        count = 1
+        i = 0
+        while i < len(string)-1:
+            if string[i] == string[i+1]:
+                count += 1
+            else:
+                result += str(count) +string[i]
+                count = 1
+            i += 1
+        return result
+####################################################################################
+Solution 2 ... using a regular expression
+
+def countAndSay(self, n):
+    s = '1'
+    for _ in range(n - 1):
+        s = ''.join(str(len(group)) + digit
+                    for group, digit in re.findall(r'((.)\2*)', s))
+    return s
+####################################################################################
+    
+Solution 3 ... using groupby
+
+def countAndSay(self, n):
+    s = '1'
+    for _ in range(n - 1):
+        s = ''.join(str(len(list(group))) + digit
+                    for digit, group in itertools.groupby(s))
+    return s
