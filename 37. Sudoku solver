@@ -1,0 +1,35 @@
+class Solution:
+    def solveSudoku(self, board: 'List[List[str]]') -> 'None':
+        """
+        Do not return anything, modify board in-place instead.
+        """
+        self.backtracking(board)
+        
+    def backtracking(self, board):    
+        x, y = -1, -1
+        for row in range(9):
+            for col in range(9):
+                if board[row][col] == '.': #find next position to fill
+                    x, y = row, col
+                    break
+            
+        if x == -1: # all position filled
+            return True
+        tmp = {"1","2","3","4","5","6","7","8","9"}
+        for col in range(9):
+            if board[x][col] in tmp:
+                tmp.discard(board[x][col]) # make sure no duplicate in a row
+        for row in range(9):
+            if board[row][y] in tmp:
+                tmp.discard(board[row][y]) # make sure no duplicate in a col
+        for row in range(x // 3 * 3, x // 3 * 3 + 3):
+            for col in range(y // 3 * 3, y // 3 * 3 + 3):
+                if board[row][col] in tmp:
+                    tmp.discard(board[row][col]) # make sure no duplicate in a 3*3 block
+        for i in tmp:
+            board[x][y] = i
+            if self.backtracking(board):
+                return True
+            else:
+                board[x][y] = '.'
+        return False
