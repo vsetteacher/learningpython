@@ -1,0 +1,15 @@
+import itertools
+
+
+class Solution:
+  
+    def combinationSum(self, candidates: 'List[int]', target: 'int') -> 'List[List[int]]':
+        
+        result = []
+        tmp = sorted(candidates)
+        for i in range(1,target//tmp[0] + 1):
+            l = list(itertools.combinations_with_replacement(tmp,i))
+            for j in l:
+                if sum(j) == target:
+                    result.append(j)
+        return result
