@@ -15,6 +15,6 @@ question 30 : substring with concatenation
 
 question 32: Longest Valid Parentheses
 
-question 37 : Sudoku Solver
+question 37 : Sudoku Solver (backtracking)
 
-question 39&40 : Combination Sum
+question 39&40 : Combination Sum (backtracking)
