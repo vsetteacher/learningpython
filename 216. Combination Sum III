@@ -8,3 +8,23 @@ class Solution:
             if sum(j) == n:
                 res.append(j)
         return res
+#######################################################################
+# Backtracking method
+
+class Solution:
+    def combinationSum3(self, k: 'int', n: 'int') -> 'List[List[int]]':
+        res = []
+        
+        self.dfs(k, n, 1, [], res)
+        return res
+    def dfs(self, k, target, index, path, res):
+        if target < 0:
+            return
+        if target == 0 and len(path) == k:
+            res.append(path)
+            return
+        for i in range(index,10):
+            if i > target:
+                break
+            
+            self.dfs(k,target-i,i+1,path + [i], res)
