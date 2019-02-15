@@ -1,0 +1,18 @@
+# failed to pass oj due to memory limit
+import itertools
+class Solution:
+    def combinationSum4(self, nums: 'List[int]', target: 'int') -> 'int':
+        res = []
+        tmp = set()
+        if not nums: return 0
+        nums.sort()
+        for i in range(1,target//nums[0]+1):
+            l = [list(x) for x in itertools.combinations_with_replacement(nums,i)]
+            for j in l:
+                if sum(j) == target:
+                    res.append(j)
+        for combination in res:
+            k = [list(x) for x in itertools.permutations(combination)]
+            for j in k:
+                tmp.add(tuple(j))
+        return len(tmp)
