@@ -16,3 +16,23 @@ class Solution:
             for j in k:
                 tmp.add(tuple(j))
         return len(tmp)
+####################################################################################
+#backtracking based on previous problem
+ 
+class Solution:
+    def combinationSum4(self, nums: 'List[int]', target: 'int') -> 'int':
+        
+        res = []
+        nums.sort()
+        self.dfs(nums, target, 0, [], res)
+        return len(res)
+
+    def dfs(self, nums, target, index, path, res):
+        if target < 0:
+            return  # backtracking
+        if target == 0:
+            res.append(path)
+            return 
+        for i in range(0, len(nums)):#since different sequence counts, start from first index every recursive
+            self.dfs(nums, target-nums[i], i, path+[nums[i]], res)
+            
