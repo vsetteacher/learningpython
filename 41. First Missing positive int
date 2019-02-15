@@ -1,13 +1,17 @@
 class Solution:
     def firstMissingPositive(self, nums: 'List[int]') -> 'int':
-        nums.sort()
+        
         num = 1
+        mx = 0
         nDict = {}
         for i in nums:
+            if i < 0:
+                continue
             nDict[i] = i
+            mx = max(mx,i)
         if num not in nDict:
             return 1
-        while num <= nums[-1]:
+        while num <= mx:
             if num not in nDict:
                 return num
             num += 1
