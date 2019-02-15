@@ -1,0 +1,14 @@
+class Solution:
+    def firstMissingPositive(self, nums: 'List[int]') -> 'int':
+        nums.sort()
+        num = 1
+        nDict = {}
+        for i in nums:
+            nDict[i] = i
+        if num not in nDict:
+            return 1
+        while num <= nums[-1]:
+            if num not in nDict:
+                return num
+            num += 1
+        return num
