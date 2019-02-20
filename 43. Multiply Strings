@@ -1,0 +1,22 @@
+class Solution:
+    def multiply(self, num1: 'str', num2: 'str') -> 'str':
+        pool = {}
+        tmp1,tmp2 = 0,0
+        index1,index2 = 0,0
+        for i in range(10):
+            pool[str(i)] = i
+        
+        if not num1 or not num2:
+            return 0
+        
+        for i in range(len(num1)-1,-1,-1):
+            tmp1 += pool[num1[i]]*(10**index1)
+            index1 += 1
+        
+        for i in range(len(num2)-1,-1,-1):
+            tmp2 += pool[num2[i]]*(10**index2)
+            index2 += 1
+        
+        res = tmp1 * tmp2
+        
+        return str(res)
